@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Tools - Murgrip Tools Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        .tool-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+        }
+        .tool-card:hover {
+            transform: scale(1.05);
+        }
+        .btn-download {
+            background: #08d9d6;
+            color: black;
+            font-weight: bold;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .btn-download:hover {
+            background: #06b6b3;
+        }
+        .footer {
+            background: #222;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark px-3">
+        <a class="navbar-brand" href="index.html">Murgrip Tools Hub</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2 class="text-center">🛠 Download Tools</h2>
+        <p class="text-center">Click the download button to get the tools.</p>
+
+        <div class="row mt-4">
+            <!-- Tool Cards -->
+            <script>
+                const tools = [
+                    {name: "📒 Notes", desc: "Simple and efficient note-taking app.", link: "https://drive.google.com/file/d/1JCdTxBdnYJg-O8CZ-TMBPDK5BsnG8JO-/view?usp=drivesdk"},
+                    {name: "💱 Currency Converter", desc: "Convert currencies with ease.", link: "https://drive.google.com/file/d/1I6_1tHyAlPddrr8x3GKnaOD4AA6wdzen/view?usp=drivesdk"},
+                    {name: "🔬 Science Quiz", desc: "Test your science knowledge!", link: "https://drive.google.com/file/d/1JnKzdccnecsHxjKKSiiOYVTiBx6TXT3b/view?usp=drivesdk"},
+                    {name: "🔑 Password Generator", desc: "Create strong passwords instantly.", link: "https://drive.google.com/file/d/1IE_KT8A78rPwmCVZZRMrKUmP7uXRwCsm/view?usp=drivesdk"},
+                    {name: "🌐 Web Inspector", desc: "Inspect and analyze web pages.", link: "https://drive.google.com/file/d/1JFCFvBRalIM9D7WfhiOMTV_P2TxEdrf-/view?usp=drivesdk"},
+                    {name: "🖼 Random Image Generator", desc: "Generate random images instantly.", link: "https://drive.google.com/file/d/1IHmkF_VIte7rTrSbesOhNzOQIIbmfz7k/view?usp=drivesdk"},
+                    {name: "📚 Trivia Generator", desc: "Generate fun trivia questions!", link: "https://drive.google.com/file/d/1I8_L9b0UvMSae01yhGDEQhFPwr14y34X/view?usp=drivesdk"},
+                    {name: "💖 Love Calculator", desc: "Check compatibility with your partner.", link: "https://drive.google.com/file/d/1Jyf5M7M5I4A7vdVJVBELw-pnhn2n9d-K/view?usp=drivesdk"},
+                    {name: "🔊 Sound Finder", desc: "Find and recognize sounds easily.", link: "https://drive.google.com/file/d/1Ji-XApNBCD5xyQqS_Qyz0YMqy4PdBu0D/view?usp=drivesdk"},
+                    {name: "📜 Fact Generator", desc: "Generate random interesting facts.", link: "https://drive.google.com/file/d/1HcKG4s_qJkSHMBWTNsRUfCOHH4qIMFl9/view?usp=drivesdk"},
+                    {name: "🛠 Tools App", desc: "A collection of powerful tools.", link: "https://drive.google.com/file/d/1JRxI0ODZzIUVUHZdKSgP-eOFdOlzeD3F/view?usp=drivesdk"},
+                    {name: "😂 Jokes Generator", desc: "Get a daily dose of laughter.", link: "https://drive.google.com/file/d/1ITawaPCPO-ufBsQiXAjwRk7B0SPWQRxq/view?usp=drivesdk"}
+                ];
+
+                tools.forEach(tool => {
+                    document.write(`
+                        <div class="col-md-4 mb-4" data-aos="fade-up">
+                            <div class="tool-card text-center">
+                                <h5>${tool.name}</h5>
+                                <p>${tool.desc}</p>
+                                <a href="${tool.link}" class="btn btn-download">Download</a>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Murgrip. All rights reserved.</p>
+    </div>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+</body>
+</html>

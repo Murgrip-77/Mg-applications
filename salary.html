@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator - Murgrip Tools Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- AdMob -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    
+    <style>
+        body { background-color: #f8f9fa; font-family: Arial, sans-serif; transition: background 0.5s, color 0.5s; }
+        .container { max-width: 600px; margin-top: 50px; }
+        .card { animation: fadeIn 0.8s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #result { display: none; }
+        .ad-banner { text-align: center; margin-top: 20px; }
+        .dark-mode { background-color: #212529; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card shadow p-4">
+        <h2 class="text-center text-primary">Salary Calculator</h2>
+
+        <label for="salary">Gross Salary:</label>
+        <input type="number" id="salary" class="form-control" placeholder="Enter salary" required>
+
+        <label for="country" class="mt-3">Select Country:</label>
+        <select id="country" class="form-select">
+            <option value="usa" data-tax="22" data-currency="$">USA (22% Tax)</option>
+            <option value="uk" data-tax="20" data-currency="£">UK (20% Tax)</option>
+            <option value="india" data-tax="15" data-currency="₹">India (15% Tax)</option>
+            <option value="custom" data-tax="0" data-currency="$">Custom (Enter Tax %)</option>
+        </select>
+
+        <div id="customTaxDiv" class="mt-3" style="display: none;">
+            <label for="customTax">Custom Tax Percentage:</label>
+            <input type="number" id="customTax" class="form-control" placeholder="Enter tax %">
+        </div>
+
+        <label for="deductions" class="mt-3">Other Deductions:</label>
+        <input type="number" id="deductions" class="form-control" placeholder="Insurance, Loans, etc.">
+
+        <label for="overtimeRate" class="mt-3">Overtime Hourly Rate:</label>
+        <input type="number" id="overtimeRate" class="form-control" placeholder="Enter overtime rate">
+
+        <label for="overtimeHours" class="mt-3">Overtime Hours Worked:</label>
+        <input type="number" id="overtimeHours" class="form-control" placeholder="Enter hours worked">
+
+        <button onclick="calculateSalary()" class="btn btn-primary mt-4 w-100">Calculate Salary</button>
+        
+        <div id="result" class="mt-4 p-3 bg-light text-dark rounded">
+            <h4 class="text-success">Net Salary:</h4>
+            <p><strong>Yearly:</strong> <span id="netYearly"></span></p>
+            <p><strong>Monthly:</strong> <span id="netMonthly"></span></p>
+            <p><strong>Overtime Pay:</strong> <span id="overtimePay"></span></p>
+            <button onclick="downloadReport()" class="btn btn-secondary w-100">Download Report (TXT)</button>
+        </div>
+
+        <button onclick="toggleDarkMode()" class="btn btn-dark mt-3 w-100">Toggle Dark Mode</button>
+    </div>
+</div>
+
+<!-- Ad Banner -->
+<div class="ad-banner">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-app-pub-6513637054819668"
+         data-ad-slot="5547097888"
+         data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<script>
+    document.getElementById("country").addEventListener("change", function () {
+        let selected = this.options[this.selectedIndex];
+        let taxRate = selected.getAttribute("data-tax");
+        let currency = selected.getAttribute("data-currency");
+        document.getElementById("customTaxDiv").style.display = (this.value === "custom") ? "block" : "none";
+    });
+
+    function calculateSalary() {
+        let salary = parseFloat(document.getElementById("salary").value) || 0;
+        let deductions = parseFloat(document.getElementById("deductions").value) || 0;
+        let overtimeRate = parseFloat(document.getElementById("overtimeRate").value) || 0;
+        let overtimeHours = parseFloat(document.getElementById("overtimeHours").value) || 0;
+        
+        let country = document.getElementById("country");
+        let selected = country.options[country.selectedIndex];
+        let taxRate = parseFloat(selected.getAttribute("data-tax"));
+        let currency = selected.getAttribute("data-currency");
+
+        if (country.value === "custom") {
+            taxRate = parseFloat(document.getElementById("customTax").value) || 0;
+        }
+
+        let taxAmount = (salary * taxRate) / 100;
+        let overtimePay = overtimeRate * overtimeHours;
+        let netSalary = salary - taxAmount - deductions + overtimePay;
+        let netMonthly = netSalary / 12;
+
+        document.getElementById("netYearly").innerHTML = `${currency} ${netSalary.toFixed(2)}`;
+        document.getElementById("netMonthly").innerHTML = `${currency} ${netMonthly.toFixed(2)}`;
+        document.getElementById("overtimePay").innerHTML = `${currency} ${overtimePay.toFixed(2)}`;
+        document.getElementById("result").style.display = "block";
+
+        showInterstitialAd();
+    }
+
+    function showInterstitialAd() {
+        let ad = document.createElement("script");
+        ad.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js";
+        document.body.appendChild(ad);
+    }
+
+    function downloadReport() {
+        let salary = document.getElementById("salary").value;
+        let deductions = document.getElementById("deductions").value;
+        let overtimeRate = document.getElementById("overtimeRate").value;
+        let overtimeHours = document.getElementById("overtimeHours").value;
+        let country = document.getElementById("country");
+        let selected = country.options[country.selectedIndex];
+        let currency = selected.getAttribute("data-currency");
+
+        let netYearly = document.getElementById("netYearly").innerText;
+        let netMonthly = document.getElementById("netMonthly").innerText;
+        let overtimePay = document.getElementById("overtimePay").innerText;
+
+        let report = `Salary Report\n====================\nGross Salary: ${currency}${salary}\nCountry: ${selected.text}\nDeductions: ${currency}${deductions}\nOvertime Rate: ${currency}${overtimeRate}\nOvertime Hours: ${overtimeHours}\n\nNet Salary (Yearly): ${netYearly}\nNet Salary (Monthly): ${netMonthly}\nOvertime Pay: ${overtimePay}\n`;
+
+        let blob = new Blob([report], { type: "text/plain" });
+        let link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "salary_report.txt";
+        link.click();
+    }
+
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+    }
+</script>
+
+</body>
+</html>

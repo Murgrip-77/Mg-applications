@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murgrip Image Editor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+        }
+        .editor-container {
+            display: flex;
+            gap: 20px;
+        }
+        .tools {
+            width: 40%;
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .preview {
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #222;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        input, button, select {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container text-center">
+    <h2 class="mb-4">Murgrip Image Editor</h2>
+    
+    <div class="editor-container">
+        <!-- Left: Tools -->
+        <div class="tools">
+            <h5>Tools</h5>
+            <input type="file" id="fileInput" accept="image/*" class="form-control">
+            <input type="text" id="filename" class="form-control" placeholder="Enter filename">
+            
+            <label>Width:</label>
+            <input type="number" id="width" class="form-control" placeholder="Width">
+            
+            <label>Height:</label>
+            <input type="number" id="height" class="form-control" placeholder="Height">
+            
+            <label>Filter:</label>
+            <select id="filter" class="form-control">
+                <option value="none">None</option>
+                <option value="grayscale(100%)">Grayscale</option>
+                <option value="sepia(100%)">Sepia</option>
+                <option value="blur(5px)">Blur</option>
+                <option value="brightness(150%)">Brightness</option>
+                <option value="contrast(200%)">High Contrast</option>
+            </select>
+
+            <button class="btn btn-primary mt-3" onclick="applyChanges()">Apply</button>
+            <button class="btn btn-success mt-2" onclick="downloadImage()">Download</button>
+            <button class="btn btn-danger mt-2" onclick="history.back()">Back</button>
+        </div>
+
+        <!-- Right: Image Preview -->
+        <div class="preview">
+            <img id="imagePreview" src="" alt="Image Preview">
+        </div>
+    </div>
+</div>
+
+<script>
+    let image = document.getElementById('imagePreview');
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        let file = event.target.files[0];
+        let reader = new FileReader();
+        reader.onload = function(e) {
+            image.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    function applyChanges() {
+        let width = document.getElementById('width').value;
+        let height = document.getElementById('height').value;
+        let filter = document.getElementById('filter').value;
+
+        image.style.filter = filter;
+        if (width) image.style.width = width + "px";
+        if (height) image.style.height = height + "px";
+    }
+
+    function downloadImage() {
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.filter = image.style.filter;
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        let link = document.createElement('a');
+        link.href = canvas.toDataURL("image/png");
+        link.download = document.getElementById('filename').value || "edited_image.png";
+        link.click();
+    }
+</script>
+
+</body>
+</html>

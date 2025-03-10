@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Log - Murgrip Tools Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #121212;
+            color: white;
+            text-align: center;
+        }
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+        }
+        .log-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .log-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #08d9d6;
+        }
+        .btn-back {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background: #555;
+        }
+        .footer {
+            background: #222;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark px-3">
+        <a class="navbar-brand" href="index.html">Murgrip Tools Hub</a>
+    </nav>
+
+    <!-- Change Log Section -->
+    <div class="container">
+        <h2 class="mt-4">Change Log</h2>
+        <p>Latest updates and improvements</p>
+
+        <!-- Update 1 -->
+        <div class="log-box" data-aos="fade-up">
+            <div class="log-title">📅 Version 1.2 - March 2025</div>
+            <p>✔ Added new UI improvements and animations.</p>
+            <p>✔ Fixed bugs in the download system.</p>
+        </div>
+
+        <!-- Update 2 -->
+        <div class="log-box" data-aos="fade-up">
+            <div class="log-title">📅 Version 1.1 - February 2025</div>
+            <p>✔ Improved security and performance updates.</p>
+            <p>✔ Added a new settings page.</p>
+        </div>
+
+        <!-- Update 3 -->
+        <div class="log-box" data-aos="fade-up">
+            <div class="log-title">📅 Version 1.0 - January 2025</div>
+            <p>✔ Initial release of Murgrip Tools Hub.</p>
+            <p>✔ Features include downloads, settings, and tools viewing.</p>
+        </div>
+
+        <!-- Back Button -->
+        <button class="btn btn-back" onclick="goBack()">⬅ Back</button>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Murgrip. All rights reserved.</p>
+    </div>
+
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+        
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
